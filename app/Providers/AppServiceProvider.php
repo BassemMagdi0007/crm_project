@@ -25,7 +25,21 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Dispatcher $events)
     {
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
-            
+            if(\Auth::check()){
+            $event->menu->add(
+                [
+                    'text' => 'Home',
+                    'url'  => 'home',
+                    'icon' => 'fas fa-fw fa-home',
+                ],
+                ['header' => 'ACCOUNT PAGES'],
+                [
+                    'text' => 'Profile',
+                    'url'  => route('user.data',\Auth::user()->id),
+                    'icon' => 'fas fa-user fa-lg mr-1 my-2',
+                ],
+            );//end stable menu
+        }//end of Auth::check
               if(\Auth::check()){
                 if(\Auth::user()->role == 0)
                 {
@@ -35,10 +49,9 @@ class AppServiceProvider extends ServiceProvider
                             'text' => 'Add User',
                             'icon'=>'fas fa-fw fa-user-plus my-2',
                             'url' => route('user.create'),
-                            //'icon_color' => 'orange',
                           ],
-                      );//end of event->menu
-                }//end of admin
+                      );//end of admin menu
+                }//end of if (admin)
             }//end of Auth::check
 
 

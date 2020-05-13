@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
-class AdminController extends Controller
+class UsersController extends Controller
 {
     
     public function create()
@@ -34,7 +34,7 @@ class AdminController extends Controller
           ]);}
           else{
           $imageName = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/users'), $imageName);
+            request()->image->move(public_path('images/users/'), $imageName);
             $image = User::create([
               'name' => $request->name,
               'email' => $request->email,
@@ -44,6 +44,21 @@ class AdminController extends Controller
             ]);}
 
       return redirect()->route('home');
+    }
+
+    public function show($id)
+    {
+      if(\Auth::user()->role==2 && $id != \Auth::user()->id)
+        return redirect()->route('user.data',\Auth::user()->id);
+      $user= User::find($id);
+      if(!$user)
+         return redirect()->route('home')->with('error',"This Profile Not Found");
+      elseif(\Auth::user()->role==1 && $user->role ==0)
+        return redirect()->route('home')->with('error',"You Cann't Open This Profile"); 
+      else
+      { 
+          return view('profile.showprofile',compact('user'));
+      }
     }
 
 }

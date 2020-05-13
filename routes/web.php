@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 //home routes
-Route::get('/', 'HomeController@index');
+Route::get('/',function (){return redirect()->route('home');});
 Route::get('/home', 'HomeController@index')->name('home');
 
 //user routes
-Route::get('/create/user','AdminController@create')->name('user.create');
-Route::post('/create/user','AdminController@store')->name('user.store');
+Route::get('/create/user','UsersController@create')->name('user.create');
+Route::post('/create/user','UsersController@store')->name('user.store');
+Route::get('/show/user/profile/{id}','UsersController@show')->name('user.data');
+
+
+

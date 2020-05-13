@@ -8,7 +8,7 @@
 @else
 @php ($userrole='Customer')
 @endif
-
+@include('message')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
