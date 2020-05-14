@@ -60,5 +60,31 @@ class UsersController extends Controller
           return view('profile.showprofile',compact('user'));
       }
     }
+    public function ChangeForm()
+    {
+      return view('profile.changepassword');
+    }
+    public function changePassword(Request $request)
+    {
+      $this->validate($request,[
+        'password' => 'required',
+        ]);
+      $user=user::find($request->id);
+      if(Hash::check($request->password,$user->password))
+      {
+        $this->validate($request,[
+          'password' => 'required|min:8',
+          'newpassword' => 'required|min:8',
+          'confirmpassword' =>'required|min:8|same:newpassword',
+          ]);
+      $user->update(['password'=>Hash::make($request->newpassword)]);
+      return redirect()->route('profile.change.form')->with('message','Your Password Updated');
+      }
+      else
+      {
+        return redirect()->route('profile.change.form')->with('error','Wrong Old Password');
+      }
+    }
+    
 
 }

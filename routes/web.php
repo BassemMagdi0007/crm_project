@@ -23,5 +23,11 @@ Route::get('/create/user','UsersController@create')->name('user.create');
 Route::post('/create/user','UsersController@store')->name('user.store');
 Route::get('/show/user/profile/{id}','UsersController@show')->name('user.data');
 
+//profile routes
+Route::get('/changepassword','UsersController@ChangeForm')->name('profile.change.form');
+Route::put('/ChangePassword','UsersController@ChangePassword')->name('password.change');
+
+
+
 
 

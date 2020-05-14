@@ -38,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
                     'url'  => route('user.data',\Auth::user()->id),
                     'icon' => 'fas fa-user fa-lg mr-1 my-2',
                 ],
+                [
+                    'text' => 'change password',
+                    'url'  => route('profile.change.form'),
+                    'icon' => 'fas fa-fw fa-lock my-2',
+                    
+                ],
             );//end stable menu
         }//end of Auth::check
               if(\Auth::check()){
