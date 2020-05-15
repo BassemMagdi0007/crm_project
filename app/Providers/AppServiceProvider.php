@@ -56,6 +56,29 @@ class AppServiceProvider extends ServiceProvider
                             'icon'=>'fas fa-fw fa-user-plus my-2',
                             'url' => route('user.create'),
                           ],
+                          [
+                            'text' => 'Users',
+                            'icon'    => 'fas fa-fw fa-users my-2',
+                            'submenu' => 
+                            [
+                              [
+                                
+                                  'text' => 'Admins',
+                                  'icon' => 'fas fa-fw fa-user-circle',
+                                  'url'  => route('user.all',0),
+                              ],
+                              [
+                                'text' => 'Employees',
+                                'icon'=>'fas fa-fw fa-user-circle',
+                                'url'  => route('user.all',1),
+                              ],
+                              [
+                                'text' => 'Customers',
+                                'icon'=>'fas fa-fw fa-user-circle',
+                                'url'  => route('user.all',2),
+                              ],
+                            ]
+                          ],
                       );//end of admin menu
                 }//end of if (admin)
             }//end of Auth::check

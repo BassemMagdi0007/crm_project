@@ -85,6 +85,19 @@ class UsersController extends Controller
         return redirect()->route('profile.change.form')->with('error','Wrong Old Password');
       }
     }
+    Public function index($role)
+    {
+      if($role<3 && $role>=0){
+        if(\Auth::user()->role !=0)
+          return redirect()->with('error',"You Cann't Open This Page");
+      $users= User::where('role','=',$role)->get();
+      if(!$users)
+        abort(404);
+      else
+        return(view('users.all',compact(['users','role'])));}
+      else
+        abort(404);
+    }
     
 
 }
