@@ -27,6 +27,9 @@ Route::get('/show/users/{role}','UsersController@index')->name('user.all');
 Route::get('/changepassword','UsersController@ChangeForm')->name('profile.change.form');
 Route::put('/ChangePassword','UsersController@ChangePassword')->name('password.change');
 
+//complain routes
+Route::get('/complain/create','ComplainController@create')->name('complain.create');
+Route::post('/complain/store','complaincontroller@store')->name('complain.store');
 
 
 
