@@ -25,28 +25,28 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Dispatcher $events)
     {
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
-            if(\Auth::check()){
-            $event->menu->add(
-                [
-                    'text' => 'Home',
-                    'url'  => 'home',
-                    'icon' => 'fas fa-fw fa-home',
-                ],
-                ['header' => 'ACCOUNT PAGES'],
-                [
-                    'text' => 'Profile',
-                    'url'  => route('user.data',\Auth::user()->id),
-                    'icon' => 'fas fa-user fa-lg mr-1 my-2',
-                ],
-                [
-                    'text' => 'change password',
-                    'url'  => route('profile.change.form'),
-                    'icon' => 'fas fa-fw fa-lock my-2',
-                    
-                ],
-            );//end stable menu
-        }//end of Auth::check
-              if(\Auth::check()){
+            if(\Auth::check())
+            {
+                $event->menu->add(
+                    [
+                        'text' => 'Home',
+                        'url'  => 'home',
+                        'icon' => 'fas fa-fw fa-home',
+                    ],
+                    ['header' => 'ACCOUNT PAGES'],
+                    [
+                        'text' => 'Profile',
+                        'url'  => route('user.data',\Auth::user()->id),
+                        'icon' => 'fas fa-user fa-lg mr-1 my-2',
+                    ],
+                    [
+                        'text' => 'change password',
+                        'url'  => route('profile.change.form'),
+                        'icon' => 'fas fa-fw fa-lock my-2',
+                        
+                    ],
+                );//end stable menu
+
                 if(\Auth::user()->role == 0)
                 {
                     $event->menu->add('Admin');
@@ -81,7 +81,20 @@ class AppServiceProvider extends ServiceProvider
                           ],
                       );//end of admin menu
                 }//end of if (admin)
-            }//end of Auth::check
+                elseif(\Auth::user()->role == 2)
+                {
+                    $event->menu->add('CUSTOMER');
+                    $event->menu->add(
+                    [
+                        'text' => 'Create Complian',  
+                        'url' => route('complain.create'),
+                        'icon'=>'fas fa-fw fa-plus',
+                        //'icon_color' => 'orange',
+                    ],
+                    
+                    );
+                }//end of customer menu
+        }//end of Auth::check
 
 
 

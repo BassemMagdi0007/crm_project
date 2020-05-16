@@ -8,8 +8,8 @@ class ComplainController extends Controller
 {
     public function create()
     {
-    //   if(\Auth::user()->role!=2)
-            // return redirect()->route('home')->with('error',"You Cann't Open This Page");
+      if(\Auth::user()->role!=2)
+         return redirect()->route('home')->with('error',"You Cann't Open This Page");
         $customer_id=\Auth::user()->id;
         return view('complain.create',compact('customer_id'));
     }
