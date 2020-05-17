@@ -30,6 +30,7 @@ Route::put('/ChangePassword','UsersController@ChangePassword')->name('password.c
 //complain routes
 Route::get('/complain/create','ComplainController@create')->name('complain.create');
 Route::post('/complain/store','complaincontroller@store')->name('complain.store');
+Route::get('complain/show/{id}','complaincontroller@show')->name('complain.details');
 
 
 
