@@ -79,6 +79,18 @@ class AppServiceProvider extends ServiceProvider
                               ],
                             ]
                           ],
+                          [
+                            'text' => 'Complains',
+                            'icon'    => 'fas fa-fw fa-th my-2',
+                            'submenu' => 
+                            [
+                                [
+                                    'text' => 'Unassign',
+                                    'icon'=>'fas fa-fw fa-exclamation',
+                                    'url'=> route('complain.all',0),
+                                  ],
+                            ]
+                          ],
                       );//end of admin menu
                 }//end of if (admin)
                 elseif(\Auth::user()->role == 2)

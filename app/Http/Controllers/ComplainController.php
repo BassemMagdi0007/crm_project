@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Complain;
+use App\User;
 use Illuminate\Http\Request;
 
 class ComplainController extends Controller
@@ -59,5 +60,19 @@ class ComplainController extends Controller
         
     }
    
+    public function index($state)
+    { 
+      if(\Auth::user()->role==0 && $state==0){
+        $complains=Complain::where('state',0)->get();
+      }
+      else
+        return abort(404);
+      if(!$complains)
+          abort(404);
+        else  
+          return view('complain.all',compact('complains','state')); 
+     
+    }
+    
 
 }
