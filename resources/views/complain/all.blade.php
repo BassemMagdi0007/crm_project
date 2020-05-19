@@ -24,6 +24,10 @@
                 <td>unsign</td>
               @elseif($state==0 && \Auth::user()->role==2)
                 <td>active</td>
+              @elseif($state==2 && \Auth::user()->role==0)
+                <td>unsign</td>
+              @elseif($state==2 && \Auth::user()->role==2)
+                <td>active</td>
               @endif
               
               <td>                    

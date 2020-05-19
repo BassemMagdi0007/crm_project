@@ -65,6 +65,9 @@ class ComplainController extends Controller
       if(\Auth::user()->role==0 && $state==0){
         $complains=Complain::where('state',0)->get();
       }
+      elseif((\Auth::user()->role==0 ||\Auth::user()->role==2) && $state==1){
+        $complains=Complain::where('state',1)->get();
+      }
       else
         return abort(404);
       if(!$complains)

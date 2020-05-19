@@ -89,6 +89,11 @@ class AppServiceProvider extends ServiceProvider
                                     'icon'=>'fas fa-fw fa-exclamation',
                                     'url'=> route('complain.all',0),
                                   ],
+                                  [
+                                    'text' => 'assign',
+                                    'icon' => 'fas fa-fw fa-check',
+                                    'url'=> route('complain.all',1),
+                                  ],
                             ]
                           ],
                       );//end of admin menu
