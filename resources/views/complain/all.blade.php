@@ -16,6 +16,9 @@
       @php($counter=0)
       
           @foreach ($complains as  $index => $complain)
+              @if(\Auth::user()->role==1 &&$complain->state!=1)
+                @continue
+              @endif
           <tr>
               <td>{{++$counter}})</td>
               <td class="pl-5">{{$complain->id}}</td>

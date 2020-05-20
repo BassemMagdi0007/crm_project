@@ -111,7 +111,20 @@ class AppServiceProvider extends ServiceProvider
                     
                     );
                 }//end of customer menu
-        }//end of Auth::check
+                elseif(\Auth::user()->role ==1)
+                {
+                    $event->menu->add('EMPLOYEE');
+                    $event->menu->add(
+                    [
+                        'text' => 'Complians',  
+                        'url' => route('complain.all',1),
+                        'icon'=>'fas fa-fw fa-th',
+                        //'icon_color' => 'orange',
+                    ],
+                    
+                    );
+                }//end of customer menu
+            }//end of Auth::check
 
 
 

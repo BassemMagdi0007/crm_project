@@ -11,7 +11,7 @@
         <br>    
         <tr>
           <td class="w-50">
-            <a href="{{$complain->image}}" target="_blank"><img src="{{$complain->image}}" alt="Complain Image" height="200" width="320"> </a>
+            <a href="{{$complain->image}}" target="_blank" ><img src="{{$complain->image}}" alt="Complain Image" height="200" width="320"> </a>
           </td>
         </tr>
     @endif

@@ -68,6 +68,12 @@ class ComplainController extends Controller
       elseif((\Auth::user()->role==0 ||\Auth::user()->role==2) && $state==1){
         $complains=Complain::where('state',1)->get();
       }
+      elseif(\Auth::user()->role==1)
+      { if($state!=1)
+          return redirect()->route('complain.all',1);
+        $user=User::find(\Auth::user()->id);
+        $complains=$user->EmployeeComplains->sortByDesc('update_at');
+      }
       else
         return abort(404);
       if(!$complains)

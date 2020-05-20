@@ -46,4 +46,8 @@ class User extends Authenticatable
         {
             return $this->hasMany('App\complain','customer_id');
         }
+        public function EmployeeComplains()
+    {
+        return $this->hasMany('App\complain','employee_id');
+    }
 }
