@@ -32,10 +32,48 @@
               @elseif($state==2 && \Auth::user()->role==2)
                 <td>active</td>
               @endif
-              
-              <td>                    
+              <td>
+                  @if($complain->state==0 &&\Auth::user()->role==0)
+              <button type="button"  class="btn btn-primary btn-sm mr-1 " data-toggle="modal" data-target="#modalPush{{$counter}}"><i class="fas fa-check"></i> Sign</button>
+                    <!--Modal: modalPush-->
+              <div class="modal fade" id="modalPush{{$counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true" data-backdrop="false" >
+                      <div class="modal-dialog modal-notify modal-info" role="document" >
+                        <!--Content-->
+                        <div class="modal-content text-center" >
+                          <!--Header-->
+                          <div class="modal-header bg-primary d-flex justify-content-center" >
+                          <h5 class="heading m-auto">Hello {{\Auth::user()->name}}</h5>
+                          <button type="button"  class="btn text-white" data-toggle="modal" data-target="#modalPush{{$counter}}"><i class="fas fa-times"></i></button>
+
+                          </div>
+                          <!--Body-->
+                          <div class="modal-body">
+                            <i class="fas fa-bell fa-4x animated rotateIn mb-4  "style="color:#33b5e5"></i>
+                            <p>please choose Employee</p>
+                          </div>
+                          <!--Footer-->
+                          <div class="modal-footer m-auto">
+                          <form action="{!!route('complain.sign')!!}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="ComplainId" value="{{$complain->id}}">
+                            <select class="form-control"  name="Empolyee_id">
+                              <option selected disabled>Select Employee</option>
+                              @foreach ($employees as $employee)
+                                <option value="{{$employee->id}}">{{$employee->name}}</option>
+                              @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-primary m-2"><i class="fas fa-check"></i>Sign</button>
+                          </form>
+                            
+                          </div>
+                        </div>
+                        <!--/.Content-->
+                      </div>
+                    </div>               
+                    @endif                    
                 <a href="{!! route('complain.details',$complain->id) !!}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Show</button>       
-             </td>
             </tr>
           @endforeach
       </tbody>

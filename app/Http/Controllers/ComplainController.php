@@ -64,9 +64,8 @@ class ComplainController extends Controller
     { 
       if(\Auth::user()->role==0 && $state==0){
         $complains=Complain::where('state',0)->get();
-      }
-      elseif((\Auth::user()->role==0 ||\Auth::user()->role==2) && $state==1){
-        $complains=Complain::where('state',1)->get();
+        $employees=User::where('role',1)->get();
+        return view('complain.all',compact('complains','state','employees'));
       }
       elseif(\Auth::user()->role==1)
       { if($state!=1)
@@ -83,5 +82,14 @@ class ComplainController extends Controller
      
     }
     
-
+    public function sign(Request $request)
+    {
+      
+      $complain=Complain::find($request->ComplainId);
+      $complain->employee_id=$request->Empolyee_id;
+      $complain->state=1;
+      $complain->update();
+      
+      return redirect()->route('complain.all',0)->with('message','The Complain Signed');
+    }
 }

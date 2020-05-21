@@ -32,6 +32,7 @@ Route::get('/complain/create','ComplainController@create')->name('complain.creat
 Route::post('/complain/store','complaincontroller@store')->name('complain.store');
 Route::get('complain/show/{id}','complaincontroller@show')->name('complain.details');
 Route::get('complain/all/{state}','complaincontroller@index')->name('complain.all');
+Route::put('/complain/sign','complaincontroller@sign')->name('complain.sign');
 
 
 
