@@ -73,12 +73,37 @@ class ComplainController extends Controller
         $user=User::find(\Auth::user()->id);
         $complains=$user->EmployeeComplains->sortByDesc('update_at');
       }
+      elseif(\Auth::user()->role==2)
+      { 
+        $temp = array();
+        if($state==2)
+        {
+          $complains=\Auth::user()->CustomerComplains->sortByDesc('update_at');
+          foreach($complains as $complain)
+            if($complain->state==2)
+              array_push($temp,$complain);
+          $complains = $temp;
+        }
+        elseif($state==1)
+        {
+          $complains=\Auth::user()->CustomerComplains;
+          foreach($complains as $complain)
+            if($complain->state!=2)
+              array_push($temp,$complain);
+          $complains = $temp;
+        }
+        elseif($state == 0) 
+          return redirect()->route('complain.all',1);
+        else
+        {
+          return redirect()->route('home');
+        }
+
+      }
       else
         return abort(404);
-      if(!$complains)
-          abort(404);
-        else  
-          return view('complain.all',compact('complains','state')); 
+       
+      return view('complain.all',compact('complains','state')); 
      
     }
     
