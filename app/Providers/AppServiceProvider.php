@@ -109,15 +109,16 @@ class AppServiceProvider extends ServiceProvider
                         //'icon_color' => 'orange',
                     ],
                     [
-                        'text' => 'History of Complians',  
-                        'url' => route('complain.all' , 2),
-                        'icon'=>'fas fa-fw fa-history',
-                    ],
-                    [
                         'text' => 'Active Complians',  
                         'url' => route('complain.all',1),
                         'icon'=>'fas fa-briefcase',
                     ],
+                    [
+                        'text' => 'History of Complians',  
+                        'url' => route('complain.all' , 2),
+                        'icon'=>'fas fa-fw fa-history',
+                    ],
+                   
                 );
                 }//end of customer menu
                 elseif(\Auth::user()->role ==1)
