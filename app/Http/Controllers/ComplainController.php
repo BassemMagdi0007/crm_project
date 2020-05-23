@@ -62,10 +62,19 @@ class ComplainController extends Controller
    
     public function index($state)
     { 
-      if(\Auth::user()->role==0 && $state==0){
-        $complains=Complain::where('state',0)->get();
-        $employees=User::where('role',1)->get();
-        return view('complain.all',compact('complains','state','employees'));
+      if(\Auth::user()->role==0 )
+      {
+        if($state==0)
+        {
+          $complains=Complain::where('state',0)->get();
+          $employees=User::where('role',1)->get();
+          return view('complain.all',compact('complains','state','employees'));
+        }
+        elseif($state==1)
+        {
+          $complains=Complain::where('state',1)->get();
+          return view('complain.all',compact('complains','state'));
+        }
       }
       elseif(\Auth::user()->role==1)
       { if($state!=1)
