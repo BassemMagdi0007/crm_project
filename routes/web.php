@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['register'=>false]);
+Auth::routes();
 //home routes
 Route::get('/',function (){return redirect()->route('home');});
 Route::get('/home', 'HomeController@index')->name('home');

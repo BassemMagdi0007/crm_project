@@ -25,16 +25,16 @@
               <td>{{$complain->title}}</td>
               @if($state==0 && \Auth::user()->role==0)
                 <td>unsign</td>
-              @elseif($state==0 && \Auth::user()->role==2)
+              @elseif( ($state==0||$state==1) && (\Auth::user()->role==2 ||\Auth::user()->role==1) )
                 <td>active</td>
-              @elseif($state==2 && \Auth::user()->role==0)
+              @elseif($state==1 && \Auth::user()->role==0)
                 <td>unsign</td>
-              @elseif($state==2 && \Auth::user()->role==2)
-                <td>active</td>
+              @elseif($state==2 && (\Auth::user()->role==0 || \Auth::user()->role==2))
+                <td>solved</td>
               @endif
               <td>
                   @if($complain->state==0 &&\Auth::user()->role==0)
-              <button type="button"  class="btn btn-primary btn-sm mr-1 " data-toggle="modal" data-target="#modalPush{{$counter}}"><i class="fas fa-check"></i> Sign</button>
+              <button type="button"  class="btn btn-primary btn-sm mr-1 w-25" data-toggle="modal" data-target="#modalPush{{$counter}}"><i class="fas fa-check"></i></button>
                     <!--Modal: modalPush-->
               <div class="modal fade" id="modalPush{{$counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                       aria-hidden="true" data-backdrop="false" >
@@ -64,7 +64,7 @@
                                 <option value="{{$employee->id}}">{{$employee->name}}</option>
                               @endforeach
                             </select>
-                            <button type="submit" class="btn btn-primary m-2"><i class="fas fa-check"></i>Sign</button>
+                            <button type="submit" class="btn btn-primary m-2 w-50"><i class="fas fa-check "></i></button>
                           </form>
                             
                           </div>
@@ -73,7 +73,7 @@
                       </div>
                     </div>               
                     @endif                    
-                <a href="{!! route('complain.details',$complain->id) !!}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> Show</button>       
+                <a href="{!! route('complain.details',$complain->id) !!}" class="btn btn-success btn-sm w-25"><i class="fas fa-eye"></i></a>       
             </tr>
           @endforeach
       </tbody>

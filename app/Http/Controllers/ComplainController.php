@@ -75,6 +75,11 @@ class ComplainController extends Controller
           $complains=Complain::where('state',1)->get();
           return view('complain.all',compact('complains','state'));
         }
+        elseif($state==2)
+        {
+          $complains=Complain::where('state',2)->get();
+          return view('complain.all',compact('complains','state'));
+        }
       }
       elseif(\Auth::user()->role==1)
       { if($state!=1)

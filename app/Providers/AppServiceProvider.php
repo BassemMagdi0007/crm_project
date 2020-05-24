@@ -85,15 +85,20 @@ class AppServiceProvider extends ServiceProvider
                             'submenu' => 
                             [
                                 [
-                                    'text' => 'Unassign',
+                                    'text' => 'Unassign Complians',
                                     'icon'=>'fas fa-fw fa-exclamation',
                                     'url'=> route('complain.all',0),
                                   ],
                                   [
-                                    'text' => 'assign',
+                                    'text' => 'Assign Complians',
                                     'icon' => 'fas fa-fw fa-check',
                                     'url'=> route('complain.all',1),
                                   ],
+                                  [
+                                    'text' => 'History Complians',  
+                                    'url' => route('complain.all' , 2),
+                                    'icon'=>'fas fa-fw fa-history',
+                                ],
                             ]
                           ],
                       );//end of admin menu
