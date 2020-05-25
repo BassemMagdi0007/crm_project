@@ -37,5 +37,5 @@ Route::put('/complain/sign','complaincontroller@sign')->name('complain.sign');
 
 //Reply routes
 Route::post('/reply/store','ReplyController@store')->name('reply.store');
-
+Route::get('/replies/active','ReplyController@activeReplies')->name('reply.active');
 

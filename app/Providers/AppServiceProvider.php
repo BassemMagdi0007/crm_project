@@ -5,6 +5,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Illuminate\Support\ServiceProvider;
 use App\User;
+use App\CustomerActiveReply;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
+        
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
+            // if(\Auth::user()->role==2)
             if(\Auth::check())
             {
                 $event->menu->add(
@@ -105,6 +108,7 @@ class AppServiceProvider extends ServiceProvider
                 }//end of if (admin)
                 elseif(\Auth::user()->role == 2)
                 {
+                    // $user = User::find(\Auth::user()->id);
                     $event->menu->add('CUSTOMER');
                     $event->menu->add(
                     [
@@ -123,7 +127,17 @@ class AppServiceProvider extends ServiceProvider
                         'url' => route('complain.all' , 2),
                         'icon'=>'fas fa-fw fa-history',
                     ],
-                   
+                );
+                $active=CustomerActiveReply::where('user_id',\Auth::user()->id)->get();
+                if($active[0]->number_active_replies)
+                $event->menu->add(
+                    [
+                        'text' => 'Active Replies',  
+                        'url' => route('reply.active'),
+                        'icon'=>'far fa-comment-alt mr-1',
+                        'label'=> $active[0]->number_active_replies,
+                        'label_color' => 'success',
+                    ],
                 );
                 }//end of customer menu
                 elseif(\Auth::user()->role ==1)
