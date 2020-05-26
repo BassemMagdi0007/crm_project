@@ -139,6 +139,13 @@ class AppServiceProvider extends ServiceProvider
                         'label_color' => 'success',
                     ],
                 );
+                $event->menu->add(
+                    [
+                        'text' => 'Replies History',  
+                        'url' => route('reply.history'),
+                        'icon'=>'fas fa-fw fa-history',
+                    ],
+                );
                 }//end of customer menu
                 elseif(\Auth::user()->role ==1)
                 {

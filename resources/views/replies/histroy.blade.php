@@ -1,14 +1,14 @@
 @extends('adminlte::page')
-@section('title','Active Replies')
+@section('title','Replies History')
 @section('content_header')
-  <h1>Active Replies</h1>
+  <h1>Replies History</h1>
 @endsection
 @section('content')
 @include('message')
   <table class="table  text-center" >
     <thead>
       <th>#</th>
-      <th>Complain ID</th>
+      <th>Complain Id</th>
       <th>This Reply Form</th>
       <th>actions</th>
     </thead>
@@ -31,12 +31,11 @@
               <td class="pl-5 ">now</td> 
             @endif
               <td>
-                @if ($reply->active)
+                
                 <button type="button" class="btn btn-success btn-sm  w-25"  data-toggle="modal" data-target="#modalPush{{$index}}"><i class="fas fa-eye "></i></button>
-                @endif
                 <!--Modal: modalPush-->
                 <div class="modal fade" id="modalPush{{$index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true" data-backdrop="false" >
+                  aria-hidden="true" data-backdrop="true" >
                   <div class="modal-dialog modal-notify modal-info" role="document" >
                     <!--Content-->
                     <div class="modal-content text-center" >

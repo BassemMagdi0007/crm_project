@@ -38,4 +38,19 @@ class ReplyController extends Controller
       else
         return redirect()->route('home')->with('error',"you can't open this page");
     }
+    public function historyReplies()
+    {
+      if(\Auth::user()->role==2)
+      {
+        $replies=Reply::where('active',0)->get()->sortByDesc('created_at');
+        $customer_replies=array();
+        foreach($replies as $reply)
+        if($reply->complain->customer_id==\Auth::user()->id)
+          $customer_replies[]=$reply;
+        $now=\Carbon\Carbon::now();
+        return view('replies.histroy',compact(['customer_replies','now']));
+      }
+      else
+        return redirect()->route('home')->with('error',"you can't open this page");
+    }
 }

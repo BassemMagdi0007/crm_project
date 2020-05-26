@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 //home routes
 Route::get('/',function (){return redirect()->route('home');});
 Route::get('/home', 'HomeController@index')->name('home');
@@ -38,4 +38,5 @@ Route::put('/complain/sign','complaincontroller@sign')->name('complain.sign');
 //Reply routes
 Route::post('/reply/store','ReplyController@store')->name('reply.store');
 Route::get('/replies/active','ReplyController@activeReplies')->name('reply.active');
+Route::get('/replies/history','ReplyController@historyReplies')->name('reply.history');
 
