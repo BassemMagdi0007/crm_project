@@ -5,13 +5,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
+use App\Reply;
 class UsersController extends Controller
 {
     
     public function create()
     {
-    //   if(\Auth::user()->role!=0)
-    //     return redirect()->route('home')->with('error',"You Cann't Open This Page");
+      if(\Auth::user()->role!=0)
+        return redirect()->route('home')->with('error',"You Cann't Open This Page");
       return view('admin.create');
     }
 
@@ -43,7 +44,7 @@ class UsersController extends Controller
               'image' => $imageName,
             ]);}
 
-      return redirect()->route('home');
+      return redirect()->route('user.all',$request->role)->with('message','You added a new user sucssefully');
     }
 
     public function show($id)
@@ -89,15 +90,47 @@ class UsersController extends Controller
     {
       if($role<3 && $role>=0){
         if(\Auth::user()->role !=0)
-          return redirect()->with('error',"You Cann't Open This Page");
+          return redirect()->back()->with('error',"You Cann't Open This Page");
       $users= User::where('role','=',$role)->get();
       if(!$users)
         abort(404);
       else
-        return(view('users.all',compact(['users','role'])));}
+        return(view('admin.all',compact(['users','role'])));}
       else
         abort(404);
     }
     
+    public function destroy(Request $request)
+    {  $user=user::find($request->destroy_id);
+      if(!$user)
+        return abort(404);
+        if(count($user->EmployeeComplains)>0)
+      {
+          $this->validate($request,['employee_name' =>['required']]);
+      }
+    
+      if($user->role==1 && count($user->EmployeeComplains)>0)
+      { 
+        $complains=$user->EmployeeComplains;
+        foreach($complains as $complain)
 
+            $complain->update(['employee_id'=>$request->employee_name]);
+        
+      }
+    elseif($user->role==2 && count($user->CustomerComplains)>0 )
+      {
+        $complains=$user->CustomerComplains;
+        foreach($complains as $complain) 
+          {if(count($complain->replies)>0)
+            {
+              $replies=Reply::where('complain_id',$complain->id)->get();
+              foreach($replies as $reply)
+                $reply->delete();
+          }
+            $complain->delete();
+          }
+      }  
+      $user->delete();
+      return redirect()->back()->with('message',"It's deleted successfully");
+    }
 }

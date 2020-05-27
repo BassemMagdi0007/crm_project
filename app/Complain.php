@@ -22,4 +22,8 @@ class Complain extends Model
       { 
           return $this->belongsTo('App\User', 'employee_id');
       }
+      public function replies()
+        { 
+            return $this->hasMany('App\Reply','complain_id');
+        }
 }

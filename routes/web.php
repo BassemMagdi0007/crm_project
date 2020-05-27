@@ -23,6 +23,7 @@ Route::get('/create/user','UsersController@create')->name('user.create');
 Route::post('/create/user','UsersController@store')->name('user.store');
 Route::get('/show/user/profile/{id}','UsersController@show')->name('user.data');
 Route::get('/show/users/{role}','UsersController@index')->name('user.all');
+Route::delete('/user/delete','UsersController@destroy')->name('user.delete');
 //profile routes
 Route::get('/changepassword','UsersController@ChangeForm')->name('profile.change.form');
 Route::put('/ChangePassword','UsersController@ChangePassword')->name('password.change');
