@@ -27,7 +27,8 @@ Route::delete('/user/delete','UsersController@destroy')->name('user.delete');
 //profile routes
 Route::get('/changepassword','UsersController@ChangeForm')->name('profile.change.form');
 Route::put('/ChangePassword','UsersController@ChangePassword')->name('password.change');
-
+Route::get('/edit/profile','UsersController@edit')->name('edit.profile');
+Route::put('/update/profile','UsersController@update')->name('profile.update');
 //complain routes
 Route::get('/complain/create','ComplainController@create')->name('complain.create');
 Route::post('/complain/store','complaincontroller@store')->name('complain.store');

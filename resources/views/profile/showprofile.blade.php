@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 @section('title','User profile')
 @section('content_header')
+@include('message')
 <i class="fas fa-user-circle fa-2x text-info"></i>
   <h1 class="d-inline">User profile:</h1>
 @endsection
@@ -12,7 +13,7 @@
     <label>Complain Image:</label>
     <br>  
     <tr>
-      <td><a href="{{$user->image}}"><img src="{{$user->image}}" alt="User profile image" style="border-radius:50%" height="120" width="200"></a></td>
+      <td><a href="{{$user->image}}" target="_blank"><img src="{{$user->image}}" alt="User profile image" style="border-radius:50%" height="120" width="200"></a></td>
     </tr>
     @endif
     <tr>
@@ -46,6 +47,9 @@
         @endif 
       </tbody>
 </table>
-
-
+  @if(\Auth::user()->id == $user->id)
+    <div>
+      <a href="{!!route('edit.profile')!!}" style="width: 30%" class="btn btn-primary btn-mg " ><i class="fas fa-edit fa-sm"></i></a>
+    </div>
+  @endif  
 @endsection
