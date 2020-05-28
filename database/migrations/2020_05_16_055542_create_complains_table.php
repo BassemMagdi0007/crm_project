@@ -21,6 +21,7 @@ class CreateComplainsTable extends Migration
             $table->integer('employee_id')->nullable();
             $table->string('image')->nullable();
             $table->integer('state')->default(0);
+            $table->integer('rate')->nullable();
             $table->timestamps();
         });
     }

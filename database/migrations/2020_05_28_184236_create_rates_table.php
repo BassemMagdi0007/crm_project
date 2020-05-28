@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerActiveRepliesTable extends Migration
+class CreateRatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateCustomerActiveRepliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_active_replies', function (Blueprint $table) {
+        Schema::create('rates', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('number_active_replies')->default(0);
+            $table->integer('rate')->default(0);
+            $table->integer('number_rate')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateCustomerActiveRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_active_replies');
+        Schema::dropIfExists('rates');
     }
 }

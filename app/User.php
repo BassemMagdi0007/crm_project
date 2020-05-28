@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\complain','employee_id');
     }
+    public function rate()
+    {
+        return $this->hasOne('App\Rate','user_id');
+    }
 }

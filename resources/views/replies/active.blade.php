@@ -52,9 +52,16 @@
                         <p>{{$reply->reply}}</p>
                       </div>
                       <!--Footer-->
-                      <div class="modal-footer m-auto">
+                     
+                        <div class="modal-footer m-auto">
+                          <form action="{!!route('rate.view')!!}" method="POST">
+                            @csrf
+                            <input type="hidden" name="ComplainId" value="{{$reply->complain_id}}">
+                            <input type="hidden" name="ReplyId" value="{{$reply->id}}">
+                            <button type="submit" class="btn btn-info ml-2">Rate</button>
+                          </form>
                       </div>
-                    </div>
+                    
                     <!--/.Content-->
                   </div>
                 </div>

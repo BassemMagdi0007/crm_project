@@ -42,3 +42,6 @@ Route::post('/reply/store','ReplyController@store')->name('reply.store');
 Route::get('/replies/active','ReplyController@activeReplies')->name('reply.active');
 Route::get('/replies/history','ReplyController@historyReplies')->name('reply.history');
 
+//Rate routes
+Route::post('/rate/view','RateController@Rateview')->name('rate.view');
+Route::post('/rate','RateController@rate')->name('rate');

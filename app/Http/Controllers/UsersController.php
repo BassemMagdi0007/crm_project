@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
 use App\Reply;
+use App\Rate;
+use App\CustomerActiveReply;
 class UsersController extends Controller
 {
     
@@ -43,7 +45,9 @@ class UsersController extends Controller
               'role' => $request->role,
               'image' => $imageName,
             ]);}
-
+      if($image->role==2)
+          CustomerActiveReply::create(['user_id' => $image->id]);
+          Rate::create(['user_id' => $image->id]);
       return redirect()->route('user.all',$request->role)->with('message','You added a new user sucssefully');
     }
 
@@ -130,6 +134,12 @@ class UsersController extends Controller
             $complain->delete();
           }
       }  
+      $active=CustomerActiveReply::where('user_id',$user->id)->get();
+      if($active)
+        $active[0]->delete();
+      $rate=Rate::where('user_id',$user->id)->get();
+        if($rate)
+          $rate[0]->delete();
       $user->delete();
       return redirect()->back()->with('message',"It's deleted successfully");
     }
@@ -169,4 +179,5 @@ class UsersController extends Controller
     }
      return redirect()->route('user.data',\Auth::user()->id)->with('message','your profile Updated Successfully');
     }
+    
 }

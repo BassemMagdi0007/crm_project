@@ -129,7 +129,7 @@ class AppServiceProvider extends ServiceProvider
                     ],
                 );
                 $active=CustomerActiveReply::where('user_id',\Auth::user()->id)->get();
-                if($active[0]->number_active_replies)
+                if(count($active) && $active[0]->number_active_replies >0)
                 $event->menu->add(
                     [
                         'text' => 'Active Replies',  
