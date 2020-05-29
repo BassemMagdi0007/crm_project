@@ -46,32 +46,29 @@
                                     <button type="submit"  class="btn btn-primary float-right col-2 ">rate</button>
                                 </div>
                             </form>
-                            {{-- @else
-                                
-                            <form class="range-field mb-0  " style="width:100%" action="{!!route('rate')!!}" method="POST">
-                                @csrf
-                                <input type="hidden" name="ComplainId" value={{$complain->id}}>
-                                <input type="hidden" name="customer_id" value={{$complain->customer->id}}>
-                            <input type="hidden" name="reply" value="{{$reply}}">
-                                <div class="form-group">
-                                    <i class="fas fa-star text-info" ></i>
-                                    <label>Rate customer:</label>
-                                    <span class="font-weight-bold text-primary CustomerRate "></span> 
-                                    <div class=" d-flex justify-content-center pt-3 ">
-                                        <i class="fas fa-angry fa-lg text-info"  ></i>
-                                        <input id="CustomerRate" name="CustomerRate" class="border-0 custom-range d-inline mx-2 " style="width:80%" type="range" min="0" max="10">
-                                        <i class="fas fa-grin-beam fa-lg float-right mt-1 text-info" ></i>
-                                    </div>  
-                                </div>
-                                
-                                <div class="form-group pb-0 pt-3" >
-                                    <a href="{!!route('home')!!}" class="btn btn-secondary col-2 "><i class="fas fa-arrow-left fa-sm" ></i> back</a>
-                                    <button type="submit"  class="btn btn-primary float-right col-2 ">rate</button>
-                                </div>
-                            </form> --}}
                         @endif  
-                        
-                        
+                        @if(\Auth::user()->role==1)
+                        <form class="range-field mb-0" style="width:100%" action="{!!route('rate')!!}" method="POST">
+                            @csrf
+                            <input type="hidden" name="ComplainId" value={{$complain->id}}>
+                            <input type="hidden" name="customer_id" value={{$complain->customer->id}}>
+                            <div class="form-group">
+                                <i class="fas fa-star text-info" ></i>
+                                <label>Rate customer:</label>
+                                <span class="font-weight-bold text-primary CustomerRate "></span> 
+                                <div class=" d-flex justify-content-center pt-3 ">
+                                    <i class="fas fa-angry fa-lg text-info"  ></i>
+                                    <input id="CustomerRate" name="CustomerRate" class="border-0 custom-range d-inline mx-2 " style="width:80%" type="range" min="0" max="10">
+                                    <i class="fas fa-grin-beam fa-lg float-right mt-1 text-info" ></i>
+                                </div>  
+                            </div>
+                            
+                            <div class="form-group pb-0 pt-3" >
+                                <a href="{!!route('home')!!}" class="btn btn-secondary col-2 "><i class="fas fa-arrow-left fa-sm" ></i> back</a>
+                                <button type="submit"  class="btn btn-primary float-right col-2 ">rate</button>
+                            </div>
+                        </form>
+                        @endif
                         
                       </div>
                     

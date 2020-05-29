@@ -40,7 +40,14 @@ class RateController extends Controller
           $employee->rate->update();
           $system_rate=SystemRate::create(['rate'=>$request->SystemRate,'feedback'=>$request->SystemRecomand]);
         }
-        return redirect()->route('home')->with('message','Thank you for your feedback');
+        elseif(\Auth::user()->role==1)
+        {
+          $customer=User::find($request->customer_id);
+          $customer->rate->rate+=$request->CustomerRate;
+          $customer->rate->number_rate++;
+          $customer->rate->update();
+        } 
+        return redirect()->route('complain.all',1)->with('message','Thank you for your feedback');
         
     }
 }

@@ -10,19 +10,22 @@ class ReplyController extends Controller
 {
     public function store(Request $request)
    {
-     Reply::create([
+      Reply::create([
         'reply' => $request->reply,
         'complain_id'=>$request->ComplainId,
-     ]);
-     $complain=Complain::find($request->ComplainId);
-     $complain->state=2;
-     $complain->update();
-     $active=CustomerActiveReply::where('user_id',$complain->customer_id)->get();
-     if($active){
-      $active[0]->number_active_replies++;
-      $active[0]->update();}
-     return redirect()->route('complain.all',1)->with('message','replay has been sended to customer and we wait his replay or his rate');
-    } 
+      ]);
+      $complain=Complain::find($request->ComplainId);
+      $complain->state=2;
+      $complain->update();
+      $active=CustomerActiveReply::where('user_id',$complain->customer_id)->get();
+      if($active)
+      {
+        $active[0]->number_active_replies++;
+        $active[0]->update();
+      }
+        $complain=Complain::find($request->ComplainId);
+        return view('rates/rate',compact('complain'))->with('message','asdsadas');
+      } 
     
     public function activeReplies()
     {

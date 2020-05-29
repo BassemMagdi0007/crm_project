@@ -22,7 +22,7 @@
           <tr>
               <td>{{++$counter}})</td>
               <td class="pl-5">{{$complain->id}}</td>
-              <td>{{$complain->title}}</td>
+              <td class="w-25">{{$complain->title}}</td>
               @if($state==0 && \Auth::user()->role==0)
                 <td>unsign</td>
               @elseif( ($state==0||$state==1) && (\Auth::user()->role==2 ||\Auth::user()->role==1) )
@@ -78,8 +78,4 @@
           @endforeach
       </tbody>
     </table>
-    {{--<div class="row d-flex justify-content-center ">
-      <div class="  ">{{$complains->links()}}</div>
-    </div>--}}
-    
 @endsection
