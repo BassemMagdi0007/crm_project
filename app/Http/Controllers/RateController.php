@@ -12,18 +12,18 @@ class RateController extends Controller
 {
     public function Rateview(Request $request)
     { 
-      if(\Auth::user()->role==2)
-      {
-        $reply=Reply::find($request->ReplyId);
-        $reply->active=0;
-        $reply->update();
-        $active=CustomerActiveReply::where('user_id',\Auth::user()->id)->get();
-        if($active)
-        {
-          $active[0]->number_active_replies--;
-          $active[0]->update();  
-        }
-      }
+      // if(\Auth::user()->role==2)
+      // {
+      //   $reply=Reply::find($request->ReplyId);
+      //   $reply->active=0;
+      //   $reply->update();
+      //   $active=CustomerActiveReply::where('user_id',\Auth::user()->id)->get();
+      //   if($active)
+      //   {
+      //     $active[0]->number_active_replies--;
+      //     $active[0]->update();  
+      //   }
+      // }
      $complain=Complain::find($request->ComplainId);
       return view('rates.rate',compact('complain'));
     }

@@ -54,11 +54,26 @@
                       <!--Footer-->
                      
                         <div class="modal-footer m-auto">
-                          <form action="{!!route('rate.view')!!}" method="POST">
+                          {{-- <form action="{!!route('rate.view')!!}" method="POST">
                             @csrf
                             <input type="hidden" name="ComplainId" value="{{$reply->complain_id}}">
                             <input type="hidden" name="ReplyId" value="{{$reply->id}}">
                             <button type="submit" class="btn btn-info ml-2">Rate</button>
+                          </form> --}}
+                          <form action="{!!route('unsolved')!!}" method="POST">
+                            @csrf
+                            @method('Put')
+                            <input type="hidden" name="ComplainId" value="{{$reply->complain_id}}">
+                            <input type="hidden" name="ReplyId" value="{{$reply->id}}">
+                            <button type="submit" class="btn btn-danger ml-2">UnSolved</button>
+                          </form>
+                            
+                          <form action="{!!route('solved')!!}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="ComplainId" value="{{$reply->complain_id}}">
+                            <input type="hidden" name="ReplyId" value="{{$reply->id}}">
+                            <button type="submit" class="btn btn-success m-2">Solved</button>
                           </form>
                       </div>
                     

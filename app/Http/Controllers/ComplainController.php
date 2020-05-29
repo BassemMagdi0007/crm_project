@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Complain;
 use App\User;
+use App\Reply;
+use App\CustomerActiveReply;
 use Illuminate\Http\Request;
 
 class ComplainController extends Controller
@@ -131,4 +133,35 @@ class ComplainController extends Controller
       
       return redirect()->route('complain.all',0)->with('message','The Complain Signed');
     }
+    public function solved(Request $request)
+    {
+        $reply=Reply::find($request->ReplyId);
+        $reply->active=0;
+        $reply->update();
+        $active= $active=CustomerActiveReply::where('user_id',\Auth::user()->id)->first();
+        if($active)
+        {
+          $active->number_active_replies--;
+          $active->update();
+        }
+     $complain=Complain::find($request->ComplainId);
+      return view('rates.rate',compact('complain'));
+    }
+    public function unsolved(Request $request)
+    {
+        $complain=Complain::find($request->ComplainId);
+        $complain->state=1;
+        $complain->update();
+        $active= $active=CustomerActiveReply::where('user_id',\Auth::user()->id)->first();
+        if($active)
+        {
+          $active->number_active_replies--;
+          $active->update();
+        }
+        $reply=Reply::find($request->ReplyId);
+        $reply->active=0;
+        $reply->update();
+        return redirect()->route('home')->with('message','Thank You We Will Try To Solve It Again ');
+    }
+   
 }
