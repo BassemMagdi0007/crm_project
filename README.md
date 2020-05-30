@@ -17,7 +17,7 @@ Open cmd on a file to download the project in it then write this command line.
 
 If you didn't download the project you will need to write this command.
 
- - "git clone https://github.com/ahmedsalah674/crm_project_research.git" 
+ - "git clone https://github.com/BassemMagdi0007/crm_project.git" 
 
 then you will countinue.
 
@@ -45,4 +45,4 @@ Now the project is ready but please note that you cannot rejester you will use t
 
 - username:admin@admin.com .
 
-- password:123456789 .
+- password:123 .
