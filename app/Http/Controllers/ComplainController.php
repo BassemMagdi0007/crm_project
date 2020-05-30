@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ComplainController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create()
     {
       if(\Auth::user()->role!=2)

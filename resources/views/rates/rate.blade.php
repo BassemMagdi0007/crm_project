@@ -102,12 +102,12 @@
             $SystemRateSpan.html($SystemRateValue.val());
             });
             
-            // const $CustomerRateSpan = $('.CustomerRate');
-            // const $CustomerRateValue = $('#CustomerRate');
-            // $CustomerRateSpan.html($CustomerRateValue.val());
-            // $CustomerRateValue.on('input change', () => {
-            // $CustomerRateSpan.html($CustomerRateValue.val());
-            // });
+            const $CustomerRateSpan = $('.CustomerRate');
+            const $CustomerRateValue = $('#CustomerRate');
+            $CustomerRateSpan.html($CustomerRateValue.val());
+            $CustomerRateValue.on('input change', () => {
+            $CustomerRateSpan.html($CustomerRateValue.val());
+            });
            
         });
     </script>

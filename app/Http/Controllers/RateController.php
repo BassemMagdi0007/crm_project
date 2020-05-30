@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class RateController extends Controller
 {
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function Rateview(Request $request)
     { 
       // if(\Auth::user()->role==2)
@@ -48,6 +52,13 @@ class RateController extends Controller
           $customer->rate->update();
         } 
         return redirect()->route('complain.all',1)->with('message','Thank you for your feedback');
-        
+    }
+    public function systemRates()
+    {
+        if(\Auth::user()->role!=0)
+            return redirect()->route('home');
+        $rates=SystemRate::all()->sortByDesc('created_at');
+        $now=\Carbon\Carbon::now();
+        return view('rates.system_rates',compact(['rates','now']));
     }
 }

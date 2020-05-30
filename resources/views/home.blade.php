@@ -24,8 +24,13 @@
                     @endif
                     
                     Welcome at CRM system {{$userrole}} : <b>{{$username}}</b> 
-                   
-                    
+
+                    @if(\Auth::user()->role == 0)
+                        <label>System Rate: <b>{{App\SystemRate::pluck('rate')->avg()*10}}%</b></label>
+                        <div class="progress mt-3" style="border-radius:50px">
+                            <div class="progress-bar"  role="progressbar" style="width:{{App\SystemRate::pluck('rate')->avg()*10}}%" aria-valuenow="{{App\SystemRate::pluck('rate')->avg()*10}}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    @endif
             </div>
         </div>
     </div>

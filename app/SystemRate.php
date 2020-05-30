@@ -9,5 +9,4 @@ class SystemRate extends Model
     protected $fillable = [
         'rate','feedback',
       ];
-      // protected $table ='systemrates';
 }

@@ -10,7 +10,10 @@ use App\Rate;
 use App\CustomerActiveReply;
 class UsersController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function create()
     {
       if(\Auth::user()->role!=0)

@@ -60,6 +60,12 @@ class AppServiceProvider extends ServiceProvider
                             'url' => route('user.create'),
                           ],
                           [
+                            'text' => 'System Rates',
+                            'icon'=>'fas fa-fw fa-star',
+                            'url'  => route('system.rates'),
+                          ],
+                          
+                          [
                             'text' => 'Users',
                             'icon'    => 'fas fa-fw fa-users my-2',
                             'submenu' => 
